@@ -7,7 +7,7 @@ import {
 	Hits, HitsStats, NoHits, Pagination, SortingSelector,
 	SelectedFilters, ResetFilters, ItemHistogramList,
 	Layout, LayoutBody, LayoutResults, TopBar,
-	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust
+	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust, Select, Tabs
 } from "searchkit";
 
 require("./index.scss");
@@ -61,11 +61,6 @@ export class SearchPage extends React.Component {
 						</TopBar>
 			      <LayoutBody>
 							<SideBar>
-								<MenuFilter
-									id="Tier"
-									title="Tier"
-									field="tierTypeName.raw"
-									listComponent={ItemHistogramList}/>
 								<CheckboxFilter id="itemtype-weapon" title="Category" label="Weapon" filter={TermQuery("itemType", 3)} />
 								<CheckboxFilter id="itemtype-armor" label="Armor" filter={TermQuery("itemType", 2)} />
 								<CheckboxFilter id="itemtype-item" label="Item" filter={TermQuery("itemType", 0)} />
@@ -80,11 +75,8 @@ export class SearchPage extends React.Component {
 								<CheckboxFilter id="itemtype-quest-step" label="Quest Step" filter={TermQuery("itemType", 12)} />
 								<CheckboxFilter id="itemtype-mission-reward" label="Mission Reward" filter={TermQuery("itemType", 11)} />
 								<CheckboxFilter id="itemtype-message" label="Message" filter={TermQuery("itemType", 7)} />
-								<RefinementListFilter
-									id="item-type-name"
-									title="Type"
-									field="itemTypeName.raw"
-									size={20}/>
+								<MenuFilter field={"tierTypeName.raw"} title="Tier" id="select-tier" listComponent={Select} />
+								<MenuFilter field={"itemTypeName.raw"} title="Type" id="select-type" listComponent={Select} />
 							</SideBar>
 			        <LayoutResults>
 		          <ActionBar>
