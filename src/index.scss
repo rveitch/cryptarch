@@ -2,13 +2,78 @@
 	background: #2a333e !important;
 }
 
+.sk-layout__body {
+	min-height: calc(100% - 60px);
+}
+
+.sk-hits-grid-hit {
+    padding: 5px;
+    max-width: 250px;
+    -webkit-box-flex: 110px;
+    -webkit-flex: 110px 0 0;
+    -ms-flex: 110px 0 0;
+    flex: 110px 0 0
+}
+
 .top-bar-menu-logo {
 	margin-right: 15px;
 }
 
-/*div.sk-select {
-	display: none;
-}*/
+.sk-layout {
+	//background: #f4f4f4;
+	background: #1D2227;
+}
+
+.sk-layout__results,
+.sk-layout__filters {
+	//background: #12171C;
+	//background: #1E242B;
+	//background: #2A333E;
+	background: #292E32;
+}
+
+.sk-hits-grid-hit a {
+	//color: #ffce1f;
+	color: #fff;
+}
+
+.sk-toggle-option.is-active {
+    background-color: #1D2227;
+    border-color: #fff;
+		color: #fff;
+}
+
+.sk-panel__header,
+.sk-toggle-option,
+.sk-reset-filters {
+	color: #ffce1f;
+}
+
+.sk-item-list-option.is-active .sk-item-list-option__text,.sk-item-list-option.is-selected .sk-item-list-option__text {
+    color: #fff;
+}
+
+
+.sk-item-list-option__text {
+	color: #999;
+	//color: #ccc;
+}
+
+.sk-refinement-list__view-more-action{
+	color: #65696C;
+}
+
+.sk-select select {
+	color: #fff;
+}
+
+.sk-hits-grid-hit img {
+		display: inline-block;
+		vertical-align: middle;
+		width: 98px;
+		height: 98px;
+		border: 2px solid #fff;
+	}
 
 .sk-layout__filters .filter--itemtype-weapon,
 .sk-layout__filters .filter--itemtype-armor,

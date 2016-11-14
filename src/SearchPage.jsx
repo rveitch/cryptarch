@@ -7,7 +7,7 @@ import {
 	Hits, HitsStats, NoHits, Pagination, SortingSelector,
 	SelectedFilters, ResetFilters, ItemHistogramList,
 	Layout, LayoutBody, LayoutResults, TopBar,
-	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust, Select, Tabs
+	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust, Select, Tabs, PageSizeSelector
 } from "searchkit";
 
 require("./index.scss");
@@ -22,9 +22,9 @@ const searchkit = new SearchkitManager(host, {
 
 /*searchkit.addDefaultQuery((query)=> {
     return query.addQuery(FilteredQuery({
-      filter:BoolShould([
-        TermQuery("tierType", "6"),
-        TermQuery("tierTypeName", "Exotic")
+      filter:BoolMust([
+        TermQuery("itemType", 3),
+				TermQuery("sourceHashes", 24296771)
       ])
     }))
   })*/
@@ -32,13 +32,13 @@ const searchkit = new SearchkitManager(host, {
 const MovieHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
 	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
-  let thumb = "http://" + result._source.icon
-	let img = (thumb == "http://null") ? "http://www.inforum.com/sites/all/themes/inforum_theme/images/touch-icon.png":"https://www.bungie.net" + result._source.icon
+	let icon = result._source.icon
+	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
   const source:any = _.extend({}, result._source, result.highlight)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} target="_blank">
-        <img data-qa="poster" className={bemBlocks.item("poster")} src={img} width="170" height="170"/>
+        <img data-qa="poster" className={bemBlocks.item("poster")} src={img} width="96" height="96"/>
         <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}>
         </div>
       </a>
@@ -52,7 +52,7 @@ export class SearchPage extends React.Component {
 			<SearchkitProvider searchkit={searchkit}>
 		    <Layout>
 		      <TopBar>
-						<div className="cryptarch-logo"><img data-qa="cryptarch-ico" className="top-bar-menu-logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/446514/destiny_vendor_icon_sm.png" height="40"/></div>
+						<div className="cryptarch-logo"><img data-qa="cryptarch-ico" className="top-bar-menu-logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/446514/destiny_vendor_icon___cryptarch_40px.png" height="40"/></div>
 		        <SearchBox
 		          autofocus={true}
 		          searchOnChange={true}
@@ -62,28 +62,32 @@ export class SearchPage extends React.Component {
 			      <LayoutBody>
 							<SideBar>
 								<CheckboxFilter id="itemtype-weapon" title="Category" label="Weapon" filter={TermQuery("itemType", 3)} />
-								<CheckboxFilter id="itemtype-armor" label="Armor" filter={TermQuery("itemType", 2)} />
-								<CheckboxFilter id="itemtype-item" label="Item" filter={TermQuery("itemType", 0)} />
-								<CheckboxFilter id="itemtype-consumable" label="Consumable" filter={TermQuery("itemType", 9)} />
-								<CheckboxFilter id="itemtype-emblem" label="Emblem" filter={TermQuery("itemType", 14)} />
-								<CheckboxFilter id="itemtype-engram" label="Engram" filter={TermQuery("itemType", 8)} />
-								<CheckboxFilter id="itemtype-currency" label="Currency" filter={TermQuery("itemType", 1)} />
-								<CheckboxFilter id="itemtype-material-exchange" label="Material Exchange" filter={TermQuery("itemType", 10)} />
-								<CheckboxFilter id="itemtype-bounty" label="Bounty" filter={TermQuery("itemType", 4)} />
-								<CheckboxFilter id="itemtype-completed-bounty" label="Completed  Bounty" filter={TermQuery("itemType", 5)} />
-								<CheckboxFilter id="itemtype-bounty-reward" label="Bounty Reward" filter={TermQuery("itemType", 6)} />
-								<CheckboxFilter id="itemtype-quest-step" label="Quest Step" filter={TermQuery("itemType", 12)} />
-								<CheckboxFilter id="itemtype-mission-reward" label="Mission Reward" filter={TermQuery("itemType", 11)} />
-								<CheckboxFilter id="itemtype-message" label="Message" filter={TermQuery("itemType", 7)} />
+								<CheckboxFilter id="itemtype-armor" title="" label="Armor" filter={TermQuery("itemType", 2)} />
+								<CheckboxFilter id="itemtype-item" title="" label="Item" filter={TermQuery("itemType", 0)} />
+								<CheckboxFilter id="itemtype-consumable" title="" label="Consumable" filter={TermQuery("itemType", 9)} />
+								<CheckboxFilter id="itemtype-emblem" title="" label="Emblem" filter={TermQuery("itemType", 14)} />
+								<CheckboxFilter id="itemtype-engram" title="" label="Engram" filter={TermQuery("itemType", 8)} />
+								<CheckboxFilter id="itemtype-currency" title="" label="Currency" filter={TermQuery("itemType", 1)} />
+								<CheckboxFilter id="itemtype-material-exchange" title="" label="Material Exchange" filter={TermQuery("itemType", 10)} />
+								<CheckboxFilter id="itemtype-bounty" title="" label="Bounty" filter={TermQuery("itemType", 4)} />
+								<CheckboxFilter id="itemtype-completed-bounty" title="" label="Completed  Bounty" filter={TermQuery("itemType", 5)} />
+								<CheckboxFilter id="itemtype-bounty-reward" title="" label="Bounty Reward" filter={TermQuery("itemType", 6)} />
+								<CheckboxFilter id="itemtype-quest-step" title="" label="Quest Step" filter={TermQuery("itemType", 12)} />
+								<CheckboxFilter id="itemtype-mission-reward" title="" label="Mission Reward" filter={TermQuery("itemType", 11)} />
+								<CheckboxFilter id="itemtype-message" title="" label="Message" filter={TermQuery("itemType", 7)} />
 								<MenuFilter field={"tierTypeName.raw"} title="Tier" id="select-tier" listComponent={Select} />
 								<MenuFilter field={"itemTypeName.raw"} title="Type" id="select-type" listComponent={Select} />
+								<CheckboxFilter id="source-roi" title="Source" label="Rise of Iron" filter={TermQuery("sourceHashes", 24296771)} />
 							</SideBar>
 			        <LayoutResults>
 		          <ActionBar>
 		            <ActionBarRow>
 		              <HitsStats/>
+									<PageSizeSelector options={[5, 10, 14, 20, 28, 30, 42, 50, 56, 100]} listComponent={Select}/>
 									<SortingSelector options={[
-										{label:"Relevance:", field:"_score", order:"desc", defaultOption:true}
+										{label:"Relevance", field:"_score", order:"desc", defaultOption:true},
+										{label:"Hash ID (Newest)", field:"itemHash", order:"desc"},
+										{label:"Hash ID (Oldest)", field:"itemHash", order:"asc"}
 									]}/>
 		            </ActionBarRow>
 		            <ActionBarRow>
@@ -91,7 +95,7 @@ export class SearchPage extends React.Component {
 		              <ResetFilters/>
 		            </ActionBarRow>
 		          </ActionBar>
-		          <Hits mod="sk-hits-grid" hitsPerPage={10} itemComponent={MovieHitsGridItem} />
+		          <Hits mod="sk-hits-grid" hitsPerPage={20} itemComponent={MovieHitsGridItem} />
 		          <NoHits/>
 							<Pagination showNumbers={true}/>
 		        </LayoutResults>
