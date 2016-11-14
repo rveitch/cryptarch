@@ -2,6 +2,44 @@
 	background: #2a333e !important;
 }
 
-.fcc-menu-logo {
+.top-bar-menu-logo {
 	margin-right: 15px;
+}
+
+div.sk-select {
+	display: none;
+}
+
+.sk-layout__filters .filter--itemtype-weapon,
+.sk-layout__filters .filter--itemtype-armor,
+.sk-layout__filters .filter--itemtype-item,
+.sk-layout__filters .filter--itemtype-quest-step,
+.sk-layout__filters .filter--itemtype-engram,
+.sk-layout__filters .filter--itemtype-bounty,
+.sk-layout__filters .filter--itemtype-emblem,
+.sk-layout__filters .filter--itemtype-consumable,
+.sk-layout__filters .filter--itemtype-completed-bounty,
+.sk-layout__filters .filter--itemtype-bounty-reward,
+.sk-layout__filters .filter--itemtype-material-exchange,
+.sk-layout__filters .filter--itemtype-mission-reward,
+.sk-layout__filters .filter--itemtype-currency {
+	margin-bottom: 0px !important;
+}
+
+.filter--itemtype-armor .sk-panel__header,
+.filter--itemtype-item .sk-panel__header,
+.filter--itemtype-armor .sk-panel__header,
+.filter--itemtype-item .sk-panel__header,
+.filter--itemtype-quest-step .sk-panel__header,
+.filter--itemtype-engram .sk-panel__header,
+.filter--itemtype-bounty .sk-panel__header,
+.filter--itemtype-emblem .sk-panel__header,
+.filter--itemtype-consumable .sk-panel__header,
+.filter--itemtype-completed-bounty .sk-panel__header,
+.filter--itemtype-bounty-reward .sk-panel__header,
+.filter--itemtype-material-exchange .sk-panel__header,
+.filter--itemtype-mission-reward .sk-panel__header,
+.filter--itemtype-currency .sk-panel__header,
+.filter--itemtype-message .sk-panel__header {
+	margin-bottom: 0;
 }
