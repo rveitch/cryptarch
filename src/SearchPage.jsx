@@ -75,9 +75,13 @@ export class SearchPage extends React.Component {
 								<CheckboxFilter id="itemtype-quest-step" title="" label="Quest Step" filter={TermQuery("itemType", 12)} />
 								<CheckboxFilter id="itemtype-mission-reward" title="" label="Mission Reward" filter={TermQuery("itemType", 11)} />
 								<CheckboxFilter id="itemtype-message" title="" label="Message" filter={TermQuery("itemType", 7)} />
-								<MenuFilter field={"tierTypeName.raw"} title="Tier" id="select-tier" listComponent={Select} />
-								<MenuFilter field={"itemTypeName.raw"} title="Type" id="select-type" listComponent={Select} />
+								<MenuFilter field={"tierTypeName.raw"} title="Rarity" id="select-tier" listComponent={Select} />
+								<MenuFilter field={"itemTypeName.raw"} title="Item Type" id="select-type" listComponent={Select} />
+								<CheckboxFilter id="itemtype-primary" title="Weapon Category" label="Primary Weapons" filter={TermQuery("bucketTypeHash", 1498876634)} />
+								<CheckboxFilter id="itemtype-special" title="" label="Special Weapons" filter={TermQuery("bucketTypeHash", 2465295065)} />
+								<CheckboxFilter id="itemtype-heavy" title="" label="Heavy Weapons" filter={TermQuery("bucketTypeHash", 953998645)} />
 								<CheckboxFilter id="source-roi" title="Source" label="Rise of Iron" filter={TermQuery("sourceHashes", 24296771)} />
+								<CheckboxFilter id="source-ttk" title="" label="The Taken King" filter={TermQuery("sourceHashes", 460228854)} />
 							</SideBar>
 			        <LayoutResults>
 		          <ActionBar>

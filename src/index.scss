@@ -87,7 +87,10 @@
 .sk-layout__filters .filter--itemtype-bounty-reward,
 .sk-layout__filters .filter--itemtype-material-exchange,
 .sk-layout__filters .filter--itemtype-mission-reward,
-.sk-layout__filters .filter--itemtype-currency {
+.sk-layout__filters .filter--itemtype-currency,
+.sk-layout__filters .filter--itemtype-primary,
+.sk-layout__filters .filter--itemtype-special,
+.sk-layout__filters .filter--source-roi {
 	margin-bottom: 0px !important;
 }
 
@@ -105,6 +108,9 @@
 .filter--itemtype-material-exchange .sk-panel__header,
 .filter--itemtype-mission-reward .sk-panel__header,
 .filter--itemtype-currency .sk-panel__header,
-.filter--itemtype-message .sk-panel__header {
+.filter--itemtype-message .sk-panel__header,
+.filter--itemtype-special .sk-panel__header,
+.filter--itemtype-heavy .sk-panel__header,
+.filter--source-ttk .sk-panel__header {
 	margin-bottom: 0;
 }
