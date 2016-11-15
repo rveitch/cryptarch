@@ -90,7 +90,9 @@
 .sk-layout__filters .filter--itemtype-currency,
 .sk-layout__filters .filter--itemtype-primary,
 .sk-layout__filters .filter--itemtype-special,
-.sk-layout__filters .filter--source-roi {
+.sk-layout__filters .filter--source-roi,
+.sk-layout__filters .filter--source-ttk,
+.sk-layout__filters .filter--source-quest {
 	margin-bottom: 0px !important;
 }
 
@@ -111,6 +113,8 @@
 .filter--itemtype-message .sk-panel__header,
 .filter--itemtype-special .sk-panel__header,
 .filter--itemtype-heavy .sk-panel__header,
-.filter--source-ttk .sk-panel__header {
+.filter--source-ttk .sk-panel__header,
+.filter--source-quest .sk-panel__header,
+.filter--exclude-Y1 .sk-panel__header {
 	margin-bottom: 0;
 }
