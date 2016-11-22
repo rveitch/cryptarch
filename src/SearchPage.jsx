@@ -83,10 +83,11 @@ export class SearchPage extends React.Component {
 								<CheckboxFilter id="source-roi" title="Source" label="Rise of Iron" filter={TermQuery("sourceHashes", 24296771)} />
 								<CheckboxFilter id="source-ttk" title="" label="The Taken King" filter={TermQuery("sourceHashes", 460228854)} />
 								<CheckboxFilter id="source-quest" title="" label="Quest" filter={TermQuery("sourceHashes", 1920307024)} />
+								<CheckboxFilter id="source-xur" title="" label="Xur" filter={TermQuery("sourceHashes", 941581325)} />
 								<CheckboxFilter id="exclude-y1" title="" label="Exclude Y1" filter={
 								  BoolShould([
-								    TermQuery("sourceHashes", 460228854),
-								    TermQuery("sourceHashes", 1920307024)
+								    TermQuery("sourceHashes", 460228854), // TTK
+								    TermQuery("sourceHashes", 24296771) // ROI
 								  ])} />
 							</SideBar>
 			        <LayoutResults>
