@@ -75,7 +75,7 @@ const MovieHitsListItem = (props)=> {
         <h3 className={bemBlocks.item("subtitle")}>
 					<span className={bemBlocks.item("item-type")}>Item Type: </span>
 					<span className={bemBlocks.item(source.tierTypeName)}>{source.tierTypeName} </span>
-					<span className={bemBlocks.item(classname)}>{classname} </span> {source.itemTypeName}
+					{classname} {source.itemTypeName}
 					</h3>
         <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.itemDescription}}></div>
       </div>
