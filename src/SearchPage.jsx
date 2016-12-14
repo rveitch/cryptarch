@@ -7,7 +7,8 @@ import {
 	Hits, HitsStats, NoHits, Pagination, SortingSelector,
 	SelectedFilters, ResetFilters, ItemHistogramList,
 	Layout, LayoutBody, LayoutResults, TopBar,
-	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust, Select, Tabs, PageSizeSelector
+	SideBar, ActionBar, ActionBarRow, RangeFilter, CheckboxFilter, SearchkitComponent, TermQuery, FilteredQuery, BoolShould, BoolMust, Select, Tabs, PageSizeSelector, ViewSwitcherToggle,
+  ViewSwitcherHits,
 } from "searchkit";
 
 require("./index.scss");
@@ -42,6 +43,42 @@ const MovieHitsGridItem = (props)=> {
         <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}>
         </div>
       </a>
+    </div>
+  )
+}
+
+const MovieHitsListItem = (props)=> {
+  const {bemBlocks, result} = props
+	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
+	let icon = result._source.icon
+	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
+	let classtype = result._source.classType
+	console.log(classtype)
+	//if classtype = 0 { var classname = 'Titan'; }
+	if (classtype === 0) {
+		var classname = "Titan"
+	} else if (classtype === 1) {
+		var classname = "Hunter"
+	} else if (classtype === 2) {
+		var classname = "Warlock"
+	} else {
+		var classname = ""
+	}
+  const source:any = _.extend({}, result._source, result.highlight)
+  return (
+    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
+      <div className={bemBlocks.item("poster")}>
+        <img data-qa="poster" src={img}/>
+      </div>
+      <div className={bemBlocks.item("details")}>
+        <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}></h2></a>
+        <h3 className={bemBlocks.item("subtitle")}>
+					<span className={bemBlocks.item("item-type")}>Item Type: </span>
+					<span className={bemBlocks.item(source.tierTypeName)}>{source.tierTypeName} </span>
+					<span className={bemBlocks.item(classname)}>{classname} </span> {source.itemTypeName}
+					</h3>
+        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.itemDescription}}></div>
+      </div>
     </div>
   )
 }
@@ -95,6 +132,7 @@ export class SearchPage extends React.Component {
 		          <ActionBar>
 		            <ActionBarRow>
 		              <HitsStats/>
+									<ViewSwitcherToggle/>
 									<PageSizeSelector options={[5, 10, 14, 20, 28, 30, 42, 50, 56, 100]} listComponent={Select}/>
 									<SortingSelector options={[
 										{label:"Relevance", field:"_score", order:"desc", defaultOption:true},
@@ -107,7 +145,14 @@ export class SearchPage extends React.Component {
 		              <ResetFilters/>
 		            </ActionBarRow>
 		          </ActionBar>
-		          <Hits mod="sk-hits-grid" hitsPerPage={20} itemComponent={MovieHitsGridItem} />
+							<ViewSwitcherHits
+								hitsPerPage={10}
+								hitComponents = {[
+									{key:"grid", title:"Grid", itemComponent:MovieHitsGridItem, defaultOption:true},
+									{key:"list", title:"List", itemComponent:MovieHitsListItem},
+								]}
+								scrollTo="body"
+								/>
 		          <NoHits/>
 							<Pagination showNumbers={true}/>
 		        </LayoutResults>

@@ -1,3 +1,74 @@
+//font-family: 'Roboto',Helvetica,Arial,sans-serif
+//font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+//https://www.bungie.net/fonts/roboto-bold.woff
+// font-family: "Neue Haas Grotesk Text", Helvetica, "Helvetica Neue", "Neue Helvetica", Arial, sans-serif;
+
+@font-face {
+ font-family: "Neue Haas Grotesk Text";
+ src: url("//cloud.webtype.com/webtype/ff/2/372efb80-f330-4d41-a9e9-30a534bb5e31");
+ src:  url("//cloud.webtype.com/webtype/ff/2/372efb80-f330-4d41-a9e9-30a534bb5e31#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/e6b27f67-2871-4263-8221-41d25e834f3a") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/1db2ac6e-1be0-42d2-93e0-5bd41a42531b") format("truetype");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Neue Haas Grotesk Text";
+ src: url("//cloud.webtype.com/webtype/ff/2/f13e5c38-87f4-4c75-89c3-d5be5b4974db");
+ src:  url("//cloud.webtype.com/webtype/ff/2/f13e5c38-87f4-4c75-89c3-d5be5b4974db#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/61511e79-868c-447c-81d4-8d3e127d37d2") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/6a61e5c8-08b2-4898-9756-9cada277231c") format("truetype");
+ font-style: italic;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Neue Haas Grotesk Text";
+ src: url("//cloud.webtype.com/webtype/ff/2/59c57bac-1058-49bf-8ba5-0b18320737e2");
+ src:  url("//cloud.webtype.com/webtype/ff/2/59c57bac-1058-49bf-8ba5-0b18320737e2#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/707c7fb7-bfd7-45a8-b496-d84fca84f01d") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/bff238c3-2b04-4aee-86e1-223f15d7c799") format("truetype");
+ font-style: normal;
+ font-weight: bold;
+}
+@font-face {
+ font-family: "Neue Haas Grotesk Text";
+ src: url("//cloud.webtype.com/webtype/ff/2/f3c6bb4a-fdb2-44d4-83dd-f09031025e65");
+ src:  url("//cloud.webtype.com/webtype/ff/2/f3c6bb4a-fdb2-44d4-83dd-f09031025e65#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/c7d29b82-c4d0-4093-bfee-fd0075c3f076") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/3e7406d7-b174-492b-b157-0231a74b334f") format("truetype");
+ font-style: italic;
+ font-weight: bold;
+}
+@font-face {
+ font-family: "Neue Haas Grotesk Display";
+ src: url("//cloud.webtype.com/webtype/ff/2/161da473-f3a3-4370-90dd-e79da53f8930");
+ src:  url("//cloud.webtype.com/webtype/ff/2/161da473-f3a3-4370-90dd-e79da53f8930#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/23b01890-80cf-4c7c-81eb-900b92c68820") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/49893024-7cc3-46e8-995f-1fc4382982a7") format("truetype");
+ font-style: normal;
+ font-weight: bold;
+}
+@font-face {
+ font-family: "Neue Haas Grotesk Display Med";
+ src: url("//cloud.webtype.com/webtype/ff/2/d03cca2a-4eac-40f5-a945-2e4d7967d8fa");
+ src:  url("//cloud.webtype.com/webtype/ff/2/d03cca2a-4eac-40f5-a945-2e4d7967d8fa#iefix")  format("embedded-opentype"),
+  url("//cloud.webtype.com/webtype/ff/3/e4d1130c-6d19-47fe-853c-02b373716d35") format("woff"),
+  url("//cloud.webtype.com/webtype/ff/1/3fde84c2-9523-46d4-8773-7ab9b67f71cd") format("truetype");
+ font-style: normal;
+ font-weight: normal;
+}
+
+.sk-layout {
+    //font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+		font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	//font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Neue Haas Grotesk Text", Helvetica, "Helvetica Neue", "Neue Helvetica", Arial, sans-serif;
+	letter-spacing: 1;
+}
+
 .sk-layout__top-bar {
 	background: #2a333e !important;
 }
@@ -19,9 +90,26 @@
 	margin-right: 15px;
 }
 
+.sk-hits-list-hit__details {
+	//width: 800px;
+}
+
+.sk-hits-list-hit__details {
+	padding-top: 0;
+	//padding-bottom: 0;
+}
+
+.sk-hits-list-hit__tier-type {
+	//float: right;
+}
+
 .sk-layout {
 	//background: #f4f4f4;
 	background: #1D2227;
+}
+
+.sk-select select {
+	background-color: #292E32;
 }
 
 .sk-layout__results,
@@ -43,8 +131,13 @@
 		color: #fff;
 }
 
+.sk-toggle-option {
+	color: #fff;
+}
+
+
 .sk-panel__header,
-.sk-toggle-option,
+.sk-toggle__item.is-active,
 .sk-reset-filters {
 	color: #ffce1f;
 }
@@ -56,18 +149,45 @@
 
 .sk-item-list-option__text {
 	color: #999;
-	//color: #ccc;
+}
+
+.sk-hits-list-hit__item-type {
+	//font-weight: bold;
+	color: #ffce1f;
+	display: none;
+}
+
+.sk-hits-list-hit__subtitle {
+	color: #676A6D;
+	//color: #999;
+}
+
+
+.sk-hits-list-hit__text {
+	color: #ccc;
 }
 
 .sk-refinement-list__view-more-action{
 	color: #65696C;
 }
 
-.sk-select select {
+.sk-select select,
+.sk-hits-list-hit__title {
 	color: #fff;
 }
 
-.sk-hits-grid-hit img {
+
+.sk-hits-list-hit__poster {
+    width: 125px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 125px;
+    -ms-flex: 0 0 125px;
+    flex: 0 0 125px;
+    padding: 0 10px
+}
+
+.sk-hits-grid-hit img,
+.sk-hits-list-hit img {
 		display: inline-block;
 		vertical-align: middle;
 		width: 98px;
@@ -122,3 +242,62 @@
 .filter--exclude-Y1 .sk-panel__header {
 	margin-bottom: 0;
 }
+
+.sk-hits-list-hit__Exotic {
+	color: #BC9F2E;
+}
+
+.sk-hits-list-hit__Legendary {
+	//color: #482E5B;
+	//color: #B0A5B7;
+	//color: #522F64;
+	//color: rgba(72,46,91,1);
+	color: #B082CB;
+}
+
+.sk-hits-list-hit__Rare {
+	color: #4E7591;
+}
+
+.sk-hits-list-hit__Uncommon {
+	color: #2B6337;
+}
+
+.sk-hits-list-hit__Common {
+	color: #E0E0E1;
+}
+
+.sk-hits-list-hit__Basic {
+	color: #999;
+}
+
+.Titan {
+	color: #FF763A; // background
+	color: #FFFDFC; // icon
+	color: #F29034;
+}
+
+.Hunter {
+	color: #C25859; // icon
+	color: #B6B6B6; // background
+}
+
+.Warlock {
+	color: #3A5954; // background
+	color: #F8E7AD; // icon
+}
+
+/*.sk-hits-list-hit__Warlock {
+	margin-top: 10px;
+}
+
+.sk-hits-list-hit__Warlock:before {
+    //content: url(https://cloud.githubusercontent.com/assets/12876929/21195751/b8406318-c1fa-11e6-93c4-69e79922984a.png);
+		background-image: url('https://cloud.githubusercontent.com/assets/12876929/21195751/b8406318-c1fa-11e6-93c4-69e79922984a.png');
+    background-size: 20px 20px;
+		//background-position: center bottom;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content:"";
+}*/
