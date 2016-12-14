@@ -13,24 +13,13 @@ import {
 
 require("./index.scss");
 
-const host = "https://3590b9d403c87e0697b6:8c2e5209a1@f08f4b1b.qb0x.com:30242/cryptarch"
+const host = (process.env.ES_HOST || 'https://cryptarch.herokuapp.com'); // Elasticsearch
 const searchkit = new SearchkitManager(host, {
 	searchOnLoad: true,
-	useHistory: true,
-  basicAuth:"3590b9d403c87e0697b6:8c2e5209a1"
+	useHistory: true
 })
-//var Hits = Searchkit.Hits;
 
-/*searchkit.addDefaultQuery((query)=> {
-    return query.addQuery(FilteredQuery({
-      filter:BoolMust([
-        TermQuery("itemType", 3),
-				TermQuery("sourceHashes", 24296771)
-      ])
-    }))
-  })*/
-
-const MovieHitsGridItem = (props)=> {
+const ManifestHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
 	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
 	let icon = result._source.icon
@@ -47,7 +36,7 @@ const MovieHitsGridItem = (props)=> {
   )
 }
 
-const MovieHitsListItem = (props)=> {
+const ManifestHitsListItem = (props)=> {
   const {bemBlocks, result} = props
 	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
 	let icon = result._source.icon
@@ -148,8 +137,8 @@ export class SearchPage extends React.Component {
 							<ViewSwitcherHits
 								hitsPerPage={10}
 								hitComponents = {[
-									{key:"grid", title:"Grid", itemComponent:MovieHitsGridItem, defaultOption:true},
-									{key:"list", title:"List", itemComponent:MovieHitsListItem},
+									{key:"grid", title:"Grid", itemComponent:ManifestHitsGridItem, defaultOption:true},
+									{key:"list", title:"List", itemComponent:ManifestHitsListItem},
 								]}
 								scrollTo="body"
 								/>
