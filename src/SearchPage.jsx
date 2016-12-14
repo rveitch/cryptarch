@@ -15,7 +15,7 @@ require("./index.scss");
 const host = "https://3590b9d403c87e0697b6:8c2e5209a1@f08f4b1b.qb0x.com:30242/cryptarch"
 const searchkit = new SearchkitManager(host, {
 	searchOnLoad: true,
-	useHistory: false,
+	useHistory: true,
   basicAuth:"3590b9d403c87e0697b6:8c2e5209a1"
 })
 //var Hits = Searchkit.Hits;
@@ -84,6 +84,7 @@ export class SearchPage extends React.Component {
 								<CheckboxFilter id="source-ttk" title="" label="The Taken King" filter={TermQuery("sourceHashes", 460228854)} />
 								<CheckboxFilter id="source-quest" title="" label="Quest" filter={TermQuery("sourceHashes", 1920307024)} />
 								<CheckboxFilter id="source-xur" title="" label="Xur" filter={TermQuery("sourceHashes", 941581325)} />
+								<CheckboxFilter id="source-dawning" title="" label="The Dawning" filter={TermQuery("sourceHashes", 4153390200)} />
 								<CheckboxFilter id="exclude-y1" title="" label="Exclude Y1" filter={
 								  BoolShould([
 								    TermQuery("sourceHashes", 460228854), // TTK
