@@ -13,10 +13,11 @@ import {
 
 require("./index.scss");
 
-const host = (process.env.ES_HOST || 'https://localhost:9200'); // Elasticsearch // 'https://cryptarch.herokuapp.com' // https://es.cryptar.ch/cryptarch/
+const host = (process.env.ES_HOST || 'https://es.cryptar.ch/cryptarch/'); // Elasticsearch // 'https://cryptarch.herokuapp.com'
 const searchkit = new SearchkitManager(host, {
 	searchOnLoad: true,
 	useHistory: true,
+  basicAuth: "admin:0ri5a"
 })
 
 searchkit.setQueryProcessor((plainQueryObject) => {
