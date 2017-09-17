@@ -13,25 +13,33 @@ import {
 
 require("./index.scss");
 
-const host = (process.env.ES_HOST || 'https://cryptarch.herokuapp.com'); // Elasticsearch
+const host = (process.env.ES_HOST || 'http://localhost:9200'); // Elasticsearch // 'https://cryptarch.herokuapp.com' // https://es.cryptar.ch/cryptarch/
 const searchkit = new SearchkitManager(host, {
 	searchOnLoad: true,
-	useHistory: true
+	useHistory: true,
+})
+
+searchkit.setQueryProcessor((plainQueryObject) => {
+  if (plainQueryObject.filter != undefined) {
+    // hot fix for ES5
+    plainQueryObject.post_filter = plainQueryObject.filter
+    delete plainQueryObject.filter
+  }
+  return plainQueryObject
 })
 
 const ManifestHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
-	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
-	let icon = result._source.icon
+	//let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
+  let url = '';
+	let icon = result._source.displayProperties.icon
 	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
   const source:any = _.extend({}, result._source, result.highlight)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-      <a href={url} target="_blank">
         <img data-qa="poster" className={bemBlocks.item("poster")} src={img} width="96" height="96"/>
         <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}>
         </div>
-      </a>
     </div>
   )
 }
@@ -39,7 +47,7 @@ const ManifestHitsGridItem = (props)=> {
 const ManifestHitsListItem = (props)=> {
   const {bemBlocks, result} = props
 	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
-	let icon = result._source.icon
+	let icon = result._source.displayProperties.icon
 	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
 	let classtype = result._source.classType
 	console.log(classtype)
@@ -60,13 +68,12 @@ const ManifestHitsListItem = (props)=> {
         <img data-qa="poster" src={img}/>
       </div>
       <div className={bemBlocks.item("details")}>
-        <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}></h2></a>
         <h3 className={bemBlocks.item("subtitle")}>
 					<span className={bemBlocks.item("item-type")}>Item Type: </span>
 					<span className={bemBlocks.item(source.tierTypeName)}>{source.tierTypeName} </span>
-					{classname} {source.itemTypeName}
+					{classname} {source.itemTypeAndTierDisplayName}
 					</h3>
-        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.itemDescription}}></div>
+        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.displayProperties.description}}></div>
       </div>
     </div>
   )
@@ -101,21 +108,12 @@ export class SearchPage extends React.Component {
 								<CheckboxFilter id="itemtype-quest-step" title="" label="Quest Step" filter={TermQuery("itemType", 12)} />
 								<CheckboxFilter id="itemtype-mission-reward" title="" label="Mission Reward" filter={TermQuery("itemType", 11)} />
 								<CheckboxFilter id="itemtype-message" title="" label="Message" filter={TermQuery("itemType", 7)} />
-								<MenuFilter field={"tierTypeName.raw"} title="Rarity" id="select-tier" listComponent={Select} />
-								<MenuFilter field={"itemTypeName.raw"} title="Item Type" id="select-type" listComponent={Select} />
+								<MenuFilter field={"inventory.tierTypeName.keyword"} title="Rarity" id="select-tier" listComponent={Select} />
+                <MenuFilter field={"className.keyword"} title="Class" id="select-class" listComponent={Select} />
+								<MenuFilter field={"itemTypeDisplayName.keyword"} title="Item Type" id="select-type" listComponent={Select} />
 								<CheckboxFilter id="itemtype-primary" title="Weapon Category" label="Primary Weapons" filter={TermQuery("bucketTypeHash", 1498876634)} />
 								<CheckboxFilter id="itemtype-special" title="" label="Special Weapons" filter={TermQuery("bucketTypeHash", 2465295065)} />
 								<CheckboxFilter id="itemtype-heavy" title="" label="Heavy Weapons" filter={TermQuery("bucketTypeHash", 953998645)} />
-								<CheckboxFilter id="source-roi" title="Source" label="Rise of Iron" filter={TermQuery("sourceHashes", 24296771)} />
-								<CheckboxFilter id="source-ttk" title="" label="The Taken King" filter={TermQuery("sourceHashes", 460228854)} />
-								<CheckboxFilter id="source-quest" title="" label="Quest" filter={TermQuery("sourceHashes", 1920307024)} />
-								<CheckboxFilter id="source-xur" title="" label="Xur" filter={TermQuery("sourceHashes", 941581325)} />
-								<CheckboxFilter id="source-dawning" title="" label="The Dawning" filter={TermQuery("sourceHashes", 4153390200)} />
-								<CheckboxFilter id="exclude-y1" title="" label="Exclude Y1" filter={
-								  BoolShould([
-								    TermQuery("sourceHashes", 460228854), // TTK
-								    TermQuery("sourceHashes", 24296771) // ROI
-								  ])} />
 							</SideBar>
 			        <LayoutResults>
 		          <ActionBar>
@@ -125,8 +123,8 @@ export class SearchPage extends React.Component {
 									<PageSizeSelector options={[5, 10, 14, 20, 28, 30, 42, 50, 56, 100]} listComponent={Select}/>
 									<SortingSelector options={[
 										{label:"Relevance", field:"_score", order:"desc", defaultOption:true},
-										{label:"Hash ID (Newest)", field:"itemHash", order:"desc"},
-										{label:"Hash ID (Oldest)", field:"itemHash", order:"asc"}
+										{label:"Hash ID (Newest)", field:"hash", order:"desc"},
+										{label:"Hash ID (Oldest)", field:"hash", order:"asc"}
 									]}/>
 		            </ActionBarRow>
 		            <ActionBarRow>
@@ -135,7 +133,7 @@ export class SearchPage extends React.Component {
 		            </ActionBarRow>
 		          </ActionBar>
 							<ViewSwitcherHits
-								hitsPerPage={10}
+								hitsPerPage={28}
 								hitComponents = {[
 									{key:"grid", title:"Grid", itemComponent:ManifestHitsGridItem, defaultOption:true},
 									{key:"list", title:"List", itemComponent:ManifestHitsListItem},
