@@ -69,6 +69,7 @@ const ManifestHitsListItem = (props)=> {
         <img data-qa="poster" src={img}/>
       </div>
       <div className={bemBlocks.item("details")}>
+      <h3 className={bemBlocks.item("title")}>{source.itemName}</h3>
         <h3 className={bemBlocks.item("subtitle")}>
 					<span className={bemBlocks.item("item-type")}>Item Type: </span>
 					<span className={bemBlocks.item(source.tierTypeName)}>{source.tierTypeName} </span>
