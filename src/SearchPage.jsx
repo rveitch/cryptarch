@@ -29,6 +29,12 @@ searchkit.setQueryProcessor((plainQueryObject) => {
   return plainQueryObject
 })
 
+/*searchkit.addDefaultQuery((query)=> {
+  return query.addQuery(FilteredQuery({
+    filter:BoolShould(TermQuery("name", "Merciless"))
+  }))
+})*/
+
 const ManifestHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
 	//let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
@@ -96,26 +102,15 @@ export class SearchPage extends React.Component {
 						</TopBar>
 			      <LayoutBody>
 							<SideBar>
-								<CheckboxFilter id="itemtype-weapon" title="Category" label="Weapon" filter={TermQuery("itemType", 3)} />
-								<CheckboxFilter id="itemtype-armor" title="" label="Armor" filter={TermQuery("itemType", 2)} />
-								<CheckboxFilter id="itemtype-item" title="" label="Item" filter={TermQuery("itemType", 0)} />
-								<CheckboxFilter id="itemtype-consumable" title="" label="Consumable" filter={TermQuery("itemType", 9)} />
-								<CheckboxFilter id="itemtype-emblem" title="" label="Emblem" filter={TermQuery("itemType", 14)} />
-								<CheckboxFilter id="itemtype-engram" title="" label="Engram" filter={TermQuery("itemType", 8)} />
-								<CheckboxFilter id="itemtype-currency" title="" label="Currency" filter={TermQuery("itemType", 1)} />
-								<CheckboxFilter id="itemtype-material-exchange" title="" label="Material Exchange" filter={TermQuery("itemType", 10)} />
-								<CheckboxFilter id="itemtype-bounty" title="" label="Bounty" filter={TermQuery("itemType", 4)} />
-								<CheckboxFilter id="itemtype-completed-bounty" title="" label="Completed  Bounty" filter={TermQuery("itemType", 5)} />
-								<CheckboxFilter id="itemtype-bounty-reward" title="" label="Bounty Reward" filter={TermQuery("itemType", 6)} />
-								<CheckboxFilter id="itemtype-quest-step" title="" label="Quest Step" filter={TermQuery("itemType", 12)} />
-								<CheckboxFilter id="itemtype-mission-reward" title="" label="Mission Reward" filter={TermQuery("itemType", 11)} />
-								<CheckboxFilter id="itemtype-message" title="" label="Message" filter={TermQuery("itemType", 7)} />
+                <MenuFilter field={"itemTypeDisplayName.keyword"} title="Item Type" id="select-type" listComponent={Select} />
 								<MenuFilter field={"inventory.tierTypeName.keyword"} title="Rarity" id="select-tier" listComponent={Select} />
                 <MenuFilter field={"className.keyword"} title="Class" id="select-class" listComponent={Select} />
-								<MenuFilter field={"itemTypeDisplayName.keyword"} title="Item Type" id="select-type" listComponent={Select} />
-								<CheckboxFilter id="itemtype-primary" title="Weapon Category" label="Primary Weapons" filter={TermQuery("bucketTypeHash", 1498876634)} />
-								<CheckboxFilter id="itemtype-special" title="" label="Special Weapons" filter={TermQuery("bucketTypeHash", 2465295065)} />
-								<CheckboxFilter id="itemtype-heavy" title="" label="Heavy Weapons" filter={TermQuery("bucketTypeHash", 953998645)} />
+                <CheckboxFilter id="itemtype-weapon" title="Category" label="Weapon" filter={TermQuery("itemType", 3)} />
+                <CheckboxFilter id="itemtype-armor" title="" label="Armor" filter={TermQuery("itemType", 2)} />
+                <br />
+								<CheckboxFilter id="itemtype-primary" title="Weapon Category" label="Primary Weapons" filter={TermQuery("inventory.bucketTypeHash", 1498876634)} />
+								<CheckboxFilter id="itemtype-special" title="" label="Special Weapons" filter={TermQuery("inventory.bucketTypeHash", 2465295065)} />
+								<CheckboxFilter id="itemtype-heavy" title="" label="Heavy Weapons" filter={TermQuery("inventory.bucketTypeHash", 953998645)} />
 							</SideBar>
 			        <LayoutResults>
 		          <ActionBar>
