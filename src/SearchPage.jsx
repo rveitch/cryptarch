@@ -37,23 +37,26 @@ searchkit.setQueryProcessor((plainQueryObject) => {
 
 const ManifestHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
-	//let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
-  let url = '';
+  //let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
+  let url = "http://db.destinytracker.com/d2/en/items/" + result._source.hash
 	let icon = result._source.displayProperties.icon
 	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
   const source:any = _.extend({}, result._source, result.highlight)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
+      <a href={url} target="_blank">
         <img data-qa="poster" className={bemBlocks.item("poster")} src={img} width="96" height="96"/>
         <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.itemName}}>
         </div>
+      </a>
     </div>
   )
 }
 
 const ManifestHitsListItem = (props)=> {
   const {bemBlocks, result} = props
-	let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
+	//let url = "https://www.bungie.net/en/Armory/Detail?type=item&item=" + result._source.itemHash
+  let url = "http://db.destinytracker.com/d2/en/items/" + result._source.hash
 	let icon = result._source.displayProperties.icon
 	let img = (icon) ? 'https://www.bungie.net' + icon : 'https://www.bungie.net' + '/img/misc/missing_icon.png'
 	let classtype = result._source.classType
@@ -72,10 +75,10 @@ const ManifestHitsListItem = (props)=> {
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <div className={bemBlocks.item("poster")}>
-        <img data-qa="poster" src={img}/>
+        <a href={url} target="_blank"><img data-qa="poster" src={img}/></a>
       </div>
       <div className={bemBlocks.item("details")}>
-      <h3 className={bemBlocks.item("title")}>{source.itemName}</h3>
+      <a href={url} target="_blank"><h3 className={bemBlocks.item("title")}>{source.itemName}</h3></a>
         <h3 className={bemBlocks.item("subtitle")}>
 					<span className={bemBlocks.item("item-type")}>Item Type: </span>
 					<span className={bemBlocks.item(source.tierTypeName)}>{source.tierTypeName} </span>
@@ -109,7 +112,7 @@ export class SearchPage extends React.Component {
                 <CheckboxFilter id="itemtype-armor" title="" label="Armor" filter={TermQuery("itemType", 2)} />
                 <br />
 								<CheckboxFilter id="itemtype-primary" title="Weapon Category" label="Primary Weapons" filter={TermQuery("inventory.bucketTypeHash", 1498876634)} />
-								<CheckboxFilter id="itemtype-special" title="" label="Special Weapons" filter={TermQuery("inventory.bucketTypeHash", 2465295065)} />
+								<CheckboxFilter id="itemtype-special" title="" label="Secondary Weapons" filter={TermQuery("inventory.bucketTypeHash", 2465295065)} />
 								<CheckboxFilter id="itemtype-heavy" title="" label="Heavy Weapons" filter={TermQuery("inventory.bucketTypeHash", 953998645)} />
 							</SideBar>
 			        <LayoutResults>
