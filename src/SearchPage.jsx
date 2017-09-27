@@ -13,7 +13,7 @@ import {
 
 require("./index.scss");
 
-const host = (process.env.ES_HOST || 'https://es.cryptar.ch/destiny2/'); // Elasticsearch // 'https://cryptarch.herokuapp.com'
+const host = (process.env.ES_HOST || 'https://es.cryptar.ch/destiny2/item'); // Elasticsearch // 'https://cryptarch.herokuapp.com'
 const searchkit = new SearchkitManager(host, {
 	searchOnLoad: true,
 	useHistory: true,
